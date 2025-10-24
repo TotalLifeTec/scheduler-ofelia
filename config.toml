@@ -19,10 +19,9 @@ schedule = "0 5 * * *"
 no-container = true
 command = "sh -c 'docker ps -a --format \"{{.Names}}\" | grep atlas_service_soc_modelo_dois | xargs -n1 docker start || true'"
 
-[job-run "stop_service_soc_modelo_dois"]
+[job-local "stop_service_soc_modelo_dois"]
 schedule = "0 13 * * *"
-no-container = true
-command = "sh -c 'docker ps -q --filter \"name=atlas_service_soc_modelo_dois\" | xargs -n1 docker stop || true'"
+command = "docker ps -q --filter \"name=atlas_service_soc_modelo_dois\" | xargs -n1 docker stop || true"
 
 [job-run "start_rpa_autorizador"]
 schedule = "0 8 * * *"
