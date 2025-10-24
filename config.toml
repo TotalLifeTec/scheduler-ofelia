@@ -1,44 +1,40 @@
 ######################################
 # CONFIGURAÇÃO DO OFELIA SCHEDULER   #
-# Automatiza start/stop de containers #
 ######################################
 
-############################
-# SERVICE_SOC_MODELO_DOIS  #
-############################
-
-[job-run "start_service_soc_modelo_dois"]
-schedule = "0 5 * * *"
-command = "sh -c 'docker ps -a --format \"{{.Names}}\" | grep atlas_service_soc_modelo_dois | xargs -n1 docker start || true'"
-
-[job-run "stop_service_soc_modelo_dois"]
-schedule = "0 13 * * *"
-command = "sh -c 'docker ps -q --filter \"name=atlas_service_soc_modelo_dois\" | xargs -n1 docker stop || true'"
-
-############################
-# RPA_AUTORIZADOR          #
-############################
-
-[job-run "start_rpa_autorizador"]
-schedule = "0 8 * * *"
-command = "sh -c 'docker ps -a --format \"{{.Names}}\" | grep atlas_rpa_autorizador | xargs -n1 docker start || true'"
-
-[job-run "stop_rpa_autorizador_noon"]
-schedule = "0 12 * * *"
-command = "sh -c 'docker ps -q --filter \"name=atlas_rpa_autorizador\" | xargs -n1 docker stop || true'"
-
-[job-run "stop_rpa_autorizador_13h"]
-schedule = "0 13 * * *"
-command = "sh -c 'docker ps -q --filter \"name=atlas_rpa_autorizador\" | xargs -n1 docker stop || true'"
-
-############################
-# AUTOMATION_MAESTRO       #
-############################
+# --- START JOBS ---
 
 [job-run "start_automation_maestro"]
 schedule = "30 4 * * *"
+no-container = true
 command = "sh -c 'docker ps -a --format \"{{.Names}}\" | grep atlas_automation_maestro | xargs -n1 docker start || true'"
 
 [job-run "stop_automation_maestro"]
 schedule = "30 13 * * *"
+no-container = true
 command = "sh -c 'docker ps -q --filter \"name=atlas_automation_maestro\" | xargs -n1 docker stop || true'"
+
+[job-run "start_service_soc_modelo_dois"]
+schedule = "0 5 * * *"
+no-container = true
+command = "sh -c 'docker ps -a --format \"{{.Names}}\" | grep atlas_service_soc_modelo_dois | xargs -n1 docker start || true'"
+
+[job-run "stop_service_soc_modelo_dois"]
+schedule = "0 13 * * *"
+no-container = true
+command = "sh -c 'docker ps -q --filter \"name=atlas_service_soc_modelo_dois\" | xargs -n1 docker stop || true'"
+
+[job-run "start_rpa_autorizador"]
+schedule = "0 8 * * *"
+no-container = true
+command = "sh -c 'docker ps -a --format \"{{.Names}}\" | grep atlas_rpa_autorizador | xargs -n1 docker start || true'"
+
+[job-run "stop_rpa_autorizador_noon"]
+schedule = "0 12 * * *"
+no-container = true
+command = "sh -c 'docker ps -q --filter \"name=atlas_rpa_autorizador\" | xargs -n1 docker stop || true'"
+
+[job-run "stop_rpa_autorizador_13h"]
+schedule = "0 13 * * *"
+no-container = true
+command = "sh -c 'docker ps -q --filter \"name=atlas_rpa_autorizador\" | xargs -n1 docker stop || true'"
