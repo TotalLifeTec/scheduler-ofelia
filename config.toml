@@ -9,7 +9,7 @@
 
 [job-run "start_service_soc_modelo_dois"]
 schedule = "0 5 * * *"
-command = "sh -c 'for c in $(docker ps -a --format \"{{.Names}}\" | grep atlas_service_soc_modelo_dois); do docker start $c; done'"
+command = "sh -c 'for c in $(docker ps -a --format \"{{.Names}}\" | grep atlas_service_soc_modelo_dois || true); do docker start $c; done'"
 
 [job-run "stop_service_soc_modelo_dois"]
 schedule = "0 13 * * *"
