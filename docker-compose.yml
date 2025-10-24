@@ -1,0 +1,9 @@
+
+services:
+  ofelia:
+    build: .
+    container_name: scheduler_ofelia
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./config.toml:/etc/ofelia/config.toml
+    restart: always
