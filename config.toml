@@ -7,74 +7,38 @@
 # SERVICE_SOC_MODELO_DOIS  #
 ############################
 
-# Sobe todos os containers do service_soc_modelo_dois às 05:00
 [job-run "start_service_soc_modelo_dois"]
 schedule = "0 5 * * *"
-command = '''
-for c in $(docker ps -a --format "{{.Names}}" | grep atlas_service_soc_modelo_dois); do
-  docker start $c
-done
-'''
+command = "sh -c 'for c in $(docker ps -a --format \"{{.Names}}\" | grep atlas_service_soc_modelo_dois); do docker start $c; done'"
 
-# Derruba todos às 13:00
 [job-run "stop_service_soc_modelo_dois"]
 schedule = "0 13 * * *"
-command = '''
-for c in $(docker ps -q --filter "name=atlas_service_soc_modelo_dois"); do
-  docker stop $c
-done
-'''
+command = "sh -c 'for c in $(docker ps -q --filter \"name=atlas_service_soc_modelo_dois\"); do docker stop $c; done'"
 
 ############################
 # RPA_AUTORIZADOR          #
 ############################
 
-# Sobe todos os containers às 08:00
 [job-run "start_rpa_autorizador"]
 schedule = "0 8 * * *"
-command = '''
-for c in $(docker ps -a --format "{{.Names}}" | grep atlas_rpa_autorizador); do
-  docker start $c
-done
-'''
+command = "sh -c 'for c in $(docker ps -a --format \"{{.Names}}\" | grep atlas_rpa_autorizador); do docker start $c; done'"
 
-# Derruba todos às 12:00
 [job-run "stop_rpa_autorizador_noon"]
 schedule = "0 12 * * *"
-command = '''
-for c in $(docker ps -q --filter "name=atlas_rpa_autorizador"); do
-  docker stop $c
-done
-'''
+command = "sh -c 'for c in $(docker ps -q --filter \"name=atlas_rpa_autorizador\"); do docker stop $c; done'"
 
-# Derruba novamente às 13:00 (garantia)
 [job-run "stop_rpa_autorizador_13h"]
 schedule = "0 13 * * *"
-command = '''
-for c in $(docker ps -q --filter "name=atlas_rpa_autorizador"); do
-  docker stop $c
-done
-'''
+command = "sh -c 'for c in $(docker ps -q --filter \"name=atlas_rpa_autorizador\"); do docker stop $c; done'"
 
 ############################
 # AUTOMATION_MAESTRO       #
 ############################
 
-# Sobe todos os containers às 04:30
 [job-run "start_automation_maestro"]
 schedule = "30 4 * * *"
-command = '''
-for c in $(docker ps -a --format "{{.Names}}" | grep atlas_automation_maestro); do
-  docker start $c
-done
-'''
+command = "sh -c 'for c in $(docker ps -a --format \"{{.Names}}\" | grep atlas_automation_maestro); do docker start $c; done'"
 
-# Derruba todos às 13:30
 [job-run "stop_automation_maestro"]
 schedule = "30 13 * * *"
-command = '''
-for c in $(docker ps -q --filter "name=atlas_automation_maestro"); do
-  docker stop $c
-done
-'''
-
+command = "sh -c 'for c in $(docker ps -q --filter \"name=atlas_automation_maestro\"); do docker stop $c; done'"
