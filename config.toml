@@ -13,7 +13,7 @@ command = "sh -c 'for c in $(docker ps -a --format \"{{.Names}}\" | grep atlas_s
 
 [job-run "stop_service_soc_modelo_dois"]
 schedule = "0 13 * * *"
-command = "sh -c 'for c in $(docker ps -q --filter \"name=atlas_service_soc_modelo_dois\"); do docker stop $c; done'"
+command = "sh -c 'for c in $(docker ps -q --filter \"name=atlas_service_soc_modelo_dois\" || true); do docker stop $c; done'"
 
 ############################
 # RPA_AUTORIZADOR          #
@@ -21,15 +21,15 @@ command = "sh -c 'for c in $(docker ps -q --filter \"name=atlas_service_soc_mode
 
 [job-run "start_rpa_autorizador"]
 schedule = "0 8 * * *"
-command = "sh -c 'for c in $(docker ps -a --format \"{{.Names}}\" | grep atlas_rpa_autorizador); do docker start $c; done'"
+command = "sh -c 'for c in $(docker ps -a --format \"{{.Names}}\" | grep atlas_rpa_autorizador || true); do docker start $c; done'"
 
 [job-run "stop_rpa_autorizador_noon"]
 schedule = "0 12 * * *"
-command = "sh -c 'for c in $(docker ps -q --filter \"name=atlas_rpa_autorizador\"); do docker stop $c; done'"
+command = "sh -c 'for c in $(docker ps -q --filter \"name=atlas_rpa_autorizador\" || true); do docker stop $c; done'"
 
 [job-run "stop_rpa_autorizador_13h"]
 schedule = "0 13 * * *"
-command = "sh -c 'for c in $(docker ps -q --filter \"name=atlas_rpa_autorizador\"); do docker stop $c; done'"
+command = "sh -c 'for c in $(docker ps -q --filter \"name=atlas_rpa_autorizador\" || true); do docker stop $c; done'"
 
 ############################
 # AUTOMATION_MAESTRO       #
@@ -37,8 +37,8 @@ command = "sh -c 'for c in $(docker ps -q --filter \"name=atlas_rpa_autorizador\
 
 [job-run "start_automation_maestro"]
 schedule = "30 4 * * *"
-command = "sh -c 'for c in $(docker ps -a --format \"{{.Names}}\" | grep atlas_automation_maestro); do docker start $c; done'"
+command = "sh -c 'for c in $(docker ps -a --format \"{{.Names}}\" | grep atlas_automation_maestro || true); do docker start $c; done'"
 
 [job-run "stop_automation_maestro"]
 schedule = "30 13 * * *"
-command = "sh -c 'for c in $(docker ps -q --filter \"name=atlas_automation_maestro\"); do docker stop $c; done'"
+command = "sh -c 'for c in $(docker ps -q --filter \"name=atlas_automation_maestro\" || true); do docker stop $c; done'"
