@@ -8,4 +8,5 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./config.toml:/etc/ofelia/config.toml
+      - ./ofelia.ini:/etc/ofelia/config.ini
     restart: always
